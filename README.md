@@ -11,7 +11,7 @@ These skills are designed to be small, easy to adapt, and composable. They work 
 1. Run the skills.sh installer:
 
 ```bash
-npx skills@latest add hoangta/skills
+npx skills@latest add hoangtmbk/skills
 ```
 
 2. Pick the skills you want, and which coding agents you want to install them on. **Make sure you select `/setup-hoangta-skills`**.
