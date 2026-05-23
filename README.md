@@ -14,6 +14,25 @@ These skills are designed to be small, easy to adapt, and composable. They work 
 npx skills@latest add hoangtmbk/skills
 ```
 
+> [!NOTE]
+> **Claude Code project installs**: the installer drops skills into `.agents/skills/`, but Claude Code only auto-discovers skills under `.claude/skills/`. After the install, symlink them across so the skills become invocable in that project:
+>
+> ```bash
+> mkdir -p .claude/skills && \
+>   for d in .agents/skills/*/; do ln -sfn "$PWD/${d%/}" ".claude/skills/$(basename "$d")"; done
+> ```
+>
+> For repeated use, drop this wrapper in your `~/.zshrc` (or `~/.bashrc`):
+>
+> ```bash
+> skills-add-cc() {
+>   npx skills@latest add "$@" && \
+>     mkdir -p .claude/skills && \
+>     for d in .agents/skills/*/; do ln -sfn "$PWD/${d%/}" ".claude/skills/$(basename "$d")"; done
+> }
+> # Usage in any project: skills-add-cc hoangtmbk/skills
+> ```
+
 2. Pick the skills you want, and which coding agents you want to install them on. **Make sure you select `/setup-hoangta-skills`**.
 
 3. Run `/setup-hoangta-skills` in your agent. It will:
