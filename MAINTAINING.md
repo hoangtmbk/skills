@@ -61,6 +61,17 @@ Most other skills (`tdd`, `diagnose`, `triage`, etc.) are unchanged from upstrea
    - `engineering/` / `productivity/` / `misc/` — must be in `README.md` + `plugin.json`
    - `personal/` / `in-progress/` / `deprecated/` — must NOT be in either
 
+## Adding a new agent or slash command
+
+The plugin can also ship subagent definitions and slash commands alongside skills (e.g. the `playwright-qa` harness ships its `bowser-qa-agent` subagent and `/browser-qa` + `/qa-clean` commands as a set). Claude Code auto-discovers these from top-level dirs in the plugin:
+
+- `agents/<name>.md` — one subagent per file. Frontmatter declares `name`, `description`, and `tools`. Referenced from the same plugin's commands as `subagent_type: <name>` (unprefixed — siblings in the same plugin don't need the `hoangta-skills:` namespace).
+- `commands/<name>.md` — one slash command per file. Frontmatter declares `description` and optionally `argument-hint`. Invoked by the user as `/<name>` (no prefix needed).
+
+No entry in `plugin.json` is needed for agents or commands — the directories are auto-discovered. The only file you need to touch besides the new agent/command file itself is whichever SKILL.md "owns" the harness, plus its `INSTALL.md` and the engineering bucket's `README.md` (to mention the bundled commands so users know what they get with the skill).
+
+**Caveat: skills.sh installer does not ship agents or commands.** The `npx skills@latest add hoangtmbk/skills` path only copies SKILL.md files into the target repo's `.claude/skills/`. If a skill depends on a sibling agent or command, document that the user must install via the Claude Code plugin path (Option B below), not via skills.sh.
+
 ## Local install (this machine)
 
 Skills currently live at `~/.claude/skills/` as symlinks pointing into `~/.agents/skills/` (the old skills.sh install from before this fork existed).
@@ -76,6 +87,8 @@ rm -rf ~/.agents/skills
 ```
 
 After this, edits in the workspace go live immediately — no rebuild step.
+
+**Agents and commands are NOT covered by `link-skills.sh`.** The script only scans `skills/**/SKILL.md`. To get the plugin's top-level `agents/` and `commands/` registered on this machine, install via the Claude Code plugin marketplace (Option B below) — or symlink each file under `~/.claude/agents/` and `~/.claude/commands/` by hand (Claude Code auto-discovers user-level files in those dirs).
 
 ## Installing in another repo
 
@@ -101,6 +114,8 @@ This seeds three files under `docs/agents/` so the engineering skills know:
 - which issue tracker to use (GitHub, GitLab, local markdown)
 - what the repo's triage label vocabulary is
 - where `CONTEXT.md` and ADRs live
+
+**Limitation: skills.sh ships skills only, not subagents or slash commands.** Skills that bundle a sibling subagent or slash command (e.g. `playwright-qa` ships with `bowser-qa-agent` + `/browser-qa` + `/qa-clean`) won't be fully functional via this path. Use Option B for those, or fall back to the skill's own `INSTALL.md` for the manual copy recipe.
 
 ### Option B — Claude Code plugin
 
