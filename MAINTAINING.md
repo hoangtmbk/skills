@@ -74,21 +74,66 @@ No entry in `plugin.json` is needed for agents or commands — the directories a
 
 ## Local install (this machine)
 
-Skills currently live at `~/.claude/skills/` as symlinks pointing into `~/.agents/skills/` (the old skills.sh install from before this fork existed).
+The goal: every file in `~/workspace/skills/` is the source of truth, and edits go live machine-wide with no rebuild step. Two dirs need wiring up — skills, and the new top-level `agents/` + `commands/`.
 
-To switch the source of truth to this workspace:
+### Skills
 
 ```bash
-# WARNING: removes the old install pointers
+# WARNING: removes the old skills.sh install pointers if present
 rm -rf ~/.agents/skills
 
 # Re-link from workspace
 ./scripts/link-skills.sh
 ```
 
-After this, edits in the workspace go live immediately — no rebuild step.
+This populates `~/.claude/skills/<name>` as symlinks into `~/workspace/skills/skills/**/<name>/`.
 
-**Agents and commands are NOT covered by `link-skills.sh`.** The script only scans `skills/**/SKILL.md`. To get the plugin's top-level `agents/` and `commands/` registered on this machine, install via the Claude Code plugin marketplace (Option B below) — or symlink each file under `~/.claude/agents/` and `~/.claude/commands/` by hand (Claude Code auto-discovers user-level files in those dirs).
+### Agents and commands (NOT covered by `link-skills.sh`)
+
+The script only scans `skills/**/SKILL.md`. The plugin's top-level `agents/` and `commands/` dirs (introduced with `playwright-qa`) need symlinks by hand. Claude Code auto-discovers anything dropped under `~/.claude/agents/` and `~/.claude/commands/`.
+
+```bash
+mkdir -p ~/.claude/agents ~/.claude/commands
+
+# Symlink every plugin agent and command into the user-level dirs
+for f in ~/workspace/skills/agents/*.md; do
+  ln -sf "$f" "$HOME/.claude/agents/$(basename "$f")"
+done
+for f in ~/workspace/skills/commands/*.md; do
+  ln -sf "$f" "$HOME/.claude/commands/$(basename "$f")"
+done
+```
+
+Verify:
+
+```bash
+ls -la ~/.claude/agents/ ~/.claude/commands/
+# Each entry should show `-> ~/workspace/skills/agents/<name>.md`
+# (or .../commands/<name>.md). If they show as regular files, something
+# replaced the symlinks — re-run the loop above.
+```
+
+After this, edits in `~/workspace/skills/` go live on the next Claude Code invocation. No restart needed.
+
+### Setting up on a fresh machine
+
+```bash
+# 1. Clone (or pull) the fork
+git clone git@github.com:hoangtmbk/skills.git ~/workspace/skills
+
+# 2. Wire up skills, agents, commands
+cd ~/workspace/skills
+./scripts/link-skills.sh
+mkdir -p ~/.claude/agents ~/.claude/commands
+for f in agents/*.md;   do ln -sf "$PWD/$f" "$HOME/.claude/agents/$(basename "$f")";   done
+for f in commands/*.md; do ln -sf "$PWD/$f" "$HOME/.claude/commands/$(basename "$f")"; done
+
+# 3. (If using the playwright-qa harness) install the CLI runtime
+npm install -g @playwright/cli
+npx playwright install chromium
+```
+
+The alternative — `/plugin install hoangtmbk/skills` via the Claude Code marketplace — is read-only and doesn't give edit-in-place. Use it on machines where you're a consumer, not an author.
 
 ## Installing in another repo
 

@@ -2,6 +2,8 @@
 
 A `/browser-qa` slash command that runs YAML-defined user Stories against a live web app in parallel and produces PASS/FAIL reports with PNG/console/network/trace artifacts.
 
+**Already installed and want to use it?** See [`USAGE.md`](./USAGE.md) for the day-to-day guide (Story authoring, flags, reading reports, secrets, vision/save-test modes).
+
 The harness ships three things together — they only make sense as a set:
 
 - `playwright-qa` skill — capability layer over `@playwright/cli`
@@ -20,11 +22,12 @@ After install, the slash command `/browser-qa` is available in any project.
 
 ## Install via manual copy (no plugin)
 
-If you can't or don't want to install the plugin, copy these 5 files from `hoangtmbk/skills` into your target repo, preserving relative paths:
+If you can't or don't want to install the plugin, copy these 6 files from `hoangtmbk/skills` into your target repo, preserving relative paths:
 
 ```
 .claude/skills/playwright-qa/SKILL.md       <- skills/engineering/playwright-qa/SKILL.md
 .claude/skills/playwright-qa/INSTALL.md     <- skills/engineering/playwright-qa/INSTALL.md (this file)
+.claude/skills/playwright-qa/USAGE.md       <- skills/engineering/playwright-qa/USAGE.md
 .claude/agents/bowser-qa-agent.md           <- agents/bowser-qa-agent.md
 .claude/commands/browser-qa.md              <- commands/browser-qa.md
 .claude/commands/qa-clean.md                <- commands/qa-clean.md
