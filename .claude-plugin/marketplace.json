@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "hoangtmbk-skills",
+  "description": "Personal agentic layer: engineering and productivity skills, plus the browser-QA harness (playwright-qa skill, bowser-qa-agent subagent, /browser-qa and /qa-clean slash commands).",
+  "owner": {
+    "name": "hoangta"
+  },
+  "plugins": [
+    {
+      "name": "hoangta-skills",
+      "description": "Skills, subagents, and slash commands for real engineering with Claude Code. Includes the browser-QA harness: playwright-qa skill + bowser-qa-agent + /browser-qa + /qa-clean.",
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/hoangtmbk/skills"
+    }
+  ]
+}
