@@ -6,41 +6,45 @@ Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit tr
 
 These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own.
 
-## Quickstart (30-second setup)
+## Quickstart
 
-1. Run the skills.sh installer:
+### Claude Code (recommended — plugin install)
+
+Ships skills + the `bowser-qa-agent` subagent + the `/browser-qa` and `/qa-clean` slash commands as one Claude Code plugin.
+
+**One-time per machine** — register the marketplace:
+
+```
+/plugin marketplace add hoangtmbk/skills
+```
+
+**Per target repo** — install the plugin (project scope):
+
+```
+/plugin install hoangta-skills@hoangtmbk-skills
+```
+
+Restart Claude Code after install. Then run `/setup-hoangta-skills` once per repo to wire up `docs/agents/` config (issue tracker, triage label vocabulary, doc location).
+
+### Codex, Gemini CLI, other coding agents (skills only)
+
+The `npx skills@latest` installer drops the `skills/` directory into `.agents/skills/`. It does **not** install the `bowser-qa-agent` subagent or the `/browser-qa` / `/qa-clean` slash commands — those are Claude Code plugin-only. If you need the browser-QA harness on a non-Claude-Code agent, copy the files manually per [`skills/engineering/playwright-qa/INSTALL.md`](./skills/engineering/playwright-qa/INSTALL.md).
 
 ```bash
 npx skills@latest add hoangtmbk/skills
 ```
 
 > [!NOTE]
-> **Claude Code project installs**: the installer drops skills into `.agents/skills/`, but Claude Code only auto-discovers skills under `.claude/skills/`. After the install, symlink them across so the skills become invocable in that project:
+> **Using the npx installer on Claude Code (fallback only)**: Claude Code auto-discovers skills under `.claude/skills/`, not `.agents/skills/`. After install, symlink them across:
 >
 > ```bash
 > mkdir -p .claude/skills && \
 >   for d in .agents/skills/*/; do ln -sfn "$PWD/${d%/}" ".claude/skills/$(basename "$d")"; done
 > ```
 >
-> For repeated use, drop this wrapper in your `~/.zshrc` (or `~/.bashrc`):
->
-> ```bash
-> skills-add-cc() {
->   npx skills@latest add "$@" && \
->     mkdir -p .claude/skills && \
->     for d in .agents/skills/*/; do ln -sfn "$PWD/${d%/}" ".claude/skills/$(basename "$d")"; done
-> }
-> # Usage in any project: skills-add-cc hoangtmbk/skills
-> ```
+> The plugin install above is the supported path for Claude Code — use this only if the plugin install isn't an option.
 
-2. Pick the skills you want, and which coding agents you want to install them on. **Make sure you select `/setup-hoangta-skills`**.
-
-3. Run `/setup-hoangta-skills` in your agent. It will:
-   - Ask you which issue tracker you want to use (GitHub, Linear, or local files)
-   - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
-   - Ask you where you want to save any docs we create
-
-4. Bam — you're ready to go.
+Then run `/setup-hoangta-skills` to set up `docs/agents/` config.
 
 ## Why These Skills Exist
 
