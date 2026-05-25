@@ -2,6 +2,7 @@
 name: bowser-qa-agent
 description: Runs a single Story end-to-end against a running web app via the playwright-qa skill and returns a structured PASS/FAIL report. Invoked in parallel (one instance per Story) by the /browser-qa slash command.
 tools: Bash, Read, Write
+model: claude-sonnet-4-6
 ---
 
 ## Purpose
