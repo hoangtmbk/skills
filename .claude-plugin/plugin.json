@@ -1,21 +1,45 @@
 {
   "name": "hoangta-skills",
+  "version": "1.2.0",
+  "description": "Engineering and productivity skills for real work with Claude Code — grilling, spec/ticket flows, TDD, code review, domain modelling, plus the browser-QA harness (playwright-qa + bowser-qa-agent + /browser-qa + /qa-clean).",
+  "author": {
+    "name": "hoangta"
+  },
+  "repository": "https://github.com/hoangtmbk/skills",
+  "license": "MIT",
+  "keywords": [
+    "engineering",
+    "skills",
+    "tdd",
+    "code-review",
+    "grilling",
+    "domain-modeling",
+    "productivity",
+    "browser-qa"
+  ],
   "skills": [
-    "./skills/engineering/diagnose",
+    "./skills/engineering/ask-matt",
+    "./skills/engineering/diagnosing-bugs",
     "./skills/engineering/grill-with-docs",
     "./skills/engineering/triage",
     "./skills/engineering/improve-codebase-architecture",
     "./skills/engineering/playwright-qa",
     "./skills/engineering/setup-hoangta-skills",
     "./skills/engineering/tdd",
-    "./skills/engineering/to-issues",
-    "./skills/engineering/to-prd",
-    "./skills/engineering/zoom-out",
+    "./skills/engineering/to-spec",
+    "./skills/engineering/to-tickets",
+    "./skills/engineering/wayfinder",
+    "./skills/engineering/implement",
     "./skills/engineering/prototype",
-    "./skills/productivity/caveman",
+    "./skills/engineering/research",
+    "./skills/engineering/domain-modeling",
+    "./skills/engineering/codebase-design",
+    "./skills/engineering/code-review",
+    "./skills/engineering/resolving-merge-conflicts",
     "./skills/productivity/grill-me",
+    "./skills/productivity/grilling",
     "./skills/productivity/handoff",
     "./skills/productivity/teach",
-    "./skills/productivity/write-a-skill"
+    "./skills/productivity/writing-great-skills"
   ]
 }

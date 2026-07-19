@@ -11,7 +11,15 @@
       "description": "Skills, subagents, and slash commands for real engineering with Claude Code. Includes the browser-QA harness: playwright-qa skill + bowser-qa-agent + /browser-qa + /qa-clean.",
       "source": "./",
       "category": "development",
-      "homepage": "https://github.com/hoangtmbk/skills"
+      "homepage": "https://github.com/hoangtmbk/skills",
+      "keywords": [
+        "engineering",
+        "skills",
+        "tdd",
+        "code-review",
+        "grilling",
+        "browser-qa"
+      ]
     }
   ]
 }
