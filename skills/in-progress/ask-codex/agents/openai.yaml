@@ -1,0 +1,8 @@
+interface:
+  display_name: "Ask Codex"
+  short_description: "Read-only second opinion from Codex"
+# Intentional asymmetry with the Claude-side frontmatter (model-invoked there):
+# link-skills.sh makes this skill visible to Codex itself, so implicit
+# invocation is blocked here to keep a spawned Codex from consulting Codex.
+policy:
+  allow_implicit_invocation: false

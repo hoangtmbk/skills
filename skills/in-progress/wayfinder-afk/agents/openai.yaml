@@ -1,0 +1,5 @@
+interface:
+  display_name: "Wayfinder AFK"
+  short_description: "Work a wayfinder map without a human in the loop"
+policy:
+  allow_implicit_invocation: false
