@@ -1,6 +1,6 @@
 ---
 name: grill-the-experts
-description: A grilling where expert subagents answer the detail questions — researched, adjudicated, and logged with receipts; only preference calls come back to you.
+description: A grilling where expert subagents answer the evidence questions; only preference calls come back to you.
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 ## The rubric
 
-Before any fan-out, run a short `/grilling` pass to pin three things: the **destination**, the hard constraints, and the user's standing preferences ("bias to boring tech", "TypeScript unless strongly contraindicated"). Together these are the **rubric** — the standard every advisor answer is judged against. A sharp rubric shrinks escalations: a question stops being a taste call once the prior it hangs on is on record.
+Before any fan-out, run a short `/grilling` pass to pin three things: the **destination**, the hard constraints, and the user's standing preferences ("bias to boring tech", "TypeScript unless strongly contraindicated"). Together these are the **rubric** — the standard every advisor answer is judged against.
 
 ## The decisions document
 
@@ -24,7 +24,7 @@ One markdown file, created when the rubric is settled — named for the effort, 
 **Dissent / reversal conditions.** <disagreement worth keeping, and what evidence would reopen the decision>
 ```
 
-Append as you go — a run that dies mid-tree loses nothing already decided.
+Append as you go.
 
 ## Walk the tree
 
@@ -43,13 +43,13 @@ Route 2–3 advisors by what the answer hangs on; mixed questions mix rows:
 | the ecosystem's current state    | a websearch subagent (libraries, benchmarks, what prior art chose) |
 | a design tradeoff                | expert-persona subagents with distinct, **opposed** lenses         |
 
-Opposed lenses are what make convergence meaningful — an advisor conceding against its own lens is the strongest signal an answer is right. Run the panel concurrently.
+Run the panel concurrently.
 
-Each advisor's brief is self-contained — the advisor sees none of this conversation — and carries the destination, the rubric, the one question, and a mandatory **answer shape**: verdict first; numbered points each tagged `[fact]` (with source URL or `path:line`), `[inference]`, or `[opinion]`; closing with the evidence that would change its mind. Tagged claims make adjudication mechanical instead of vibes.
+Each advisor's brief is self-contained — the advisor sees none of this conversation — and carries the destination, the rubric, the one question, and a mandatory **answer shape**: verdict first; numbered points each tagged `[fact]` (with source URL or `path:line`), `[inference]`, or `[opinion]`; closing with the evidence that would change its mind.
 
 ## Adjudicate
 
-Judge the returns against the rubric, evidence-weighted: checkable `[fact]`s outrank `[inference]`, which outranks `[opinion]` — and verify any load-bearing checkable claim before adopting it. Record the entry in the decisions document, keeping the dissent and the union of the advisors' reversal conditions.
+Judge the returns against the rubric, evidence-weighted: checkable `[fact]`s outrank `[inference]`, which outranks `[opinion]`, and an advisor conceding against its own lens is the strongest convergence signal. Verify any load-bearing checkable claim before adopting it. Record the entry in the decisions document, keeping the dissent and the union of the advisors' reversal conditions.
 
 - **Contested after adjudication** → `/ask-codex` as tiebreaker: one lens, the contested claim inlined in the brief.
 - **Still contested** → it was a preference call in disguise. Escalate to the user.
