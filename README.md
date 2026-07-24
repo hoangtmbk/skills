@@ -26,6 +26,19 @@ Ships skills + the `bowser-qa-agent` subagent + the `/browser-qa` and `/qa-clean
 
 Restart Claude Code after install. Then run `/setup-hoangta-skills` once per repo to wire up `docs/agents/` config (issue tracker, triage label vocabulary, doc location).
 
+**Selective activation** — to disable skills you don't need in a repo, add `skillOverrides` to the repo's `.claude/settings.json`:
+
+```json
+{
+  "skillOverrides": {
+    "hoangta-skills:tdd": "off",
+    "hoangta-skills:triage": "off"
+  }
+}
+```
+
+`"off"` removes the skill from the preloaded catalog entirely (saves context tokens). `"name-only"` keeps the name visible but drops the description.
+
 ### Codex, Gemini CLI, other coding agents (skills only)
 
 The `npx skills@latest` installer drops the `skills/` directory into `.agents/skills/`. It does **not** install the `bowser-qa-agent` subagent or the `/browser-qa` / `/qa-clean` slash commands — those are Claude Code plugin-only. If you need the browser-QA harness on a non-Claude-Code agent, copy the files manually per [`skills/engineering/playwright-qa/INSTALL.md`](./skills/engineering/playwright-qa/INSTALL.md).
