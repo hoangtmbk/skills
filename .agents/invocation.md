@@ -15,6 +15,8 @@ Bucket `README.md`s and the top-level `README.md` group entries into **User-invo
 
 Dependencies are expressed as **`/skill`-style prose invocation** ("Run the `/grilling` skill"), not deep `../other-skill/FILE.md` cross-references. Shared reference docs live inside the skill that owns them; other skills reach that material by invoking the skill, not by linking across folders.
 
+That rule assumes the dependency is reachable, which holds in every direction but one: a **user-invoked skill depending on another user-invoked skill**. Prose invocation can't express it — the model is blocked from firing the target, and the harness loads only the skill the human typed. When a skill is genuinely a *variant* of another user-invoked skill, the escape hatch is **read, don't invoke**: point at the base skill's `SKILL.md` by path and say to read it, keeping the variant a pure diff rather than a copy that drifts. `/wayfinder-afk` does this with `/wayfinder`. Reach for it only for that case — if the dependency can be model-invoked, make it model-invoked instead. A variant that proves out should eventually fold into its base as another mode, which removes the cross-reference entirely.
+
 ## Passive vs active domain work
 
 Merely _reading_ `CONTEXT.md` for vocabulary is a one-line prose pointer, not the `domain-modeling` skill. Only the active build/sharpen discipline (challenge terms, edge-case scenarios, write ADRs, update `CONTEXT.md` inline) is `domain-modeling`.

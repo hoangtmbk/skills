@@ -1,7 +1,6 @@
 ---
 name: grill-the-experts
-description: A grilling where expert subagents answer the evidence questions; only preference calls come back to you.
-disable-model-invocation: true
+description: Grill a plan or decision with a panel of expert subagents answering the evidence questions, adjudicated against a rubric. Use when the user wants a decision tree resolved without being asked every question, asks for an expert panel or advisor fan-out, or when another skill routes its grilling questions to experts.
 ---
 
 `/grilling` with one difference: the relentless one-at-a-time interview is unchanged, but a **panel** of advisor subagents answers instead of the user, who keeps only what evidence can't settle — the destination and their preferences.

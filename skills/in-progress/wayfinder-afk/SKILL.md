@@ -6,6 +6,14 @@ disable-model-invocation: true
 
 `/wayfinder` with one substitution: grilling tickets resolve through `/grill-the-experts` instead of `/grilling` and `/domain-modeling`, so a session can work the map with no human in the loop. Everything else — the map, tickets, fog of war, claiming, one ticket per session — is unchanged, and the map format is identical: a map charted by `/wayfinder` can be worked by this skill and vice versa, session by session.
 
+## Read `/wayfinder` first
+
+This skill is **deltas only**. The map body format, ticket format, ticket types, claiming, blocking and the frontier, fog of war, out of scope, and the work-through loop all live in `/wayfinder` and are deliberately not restated here — restating them would let the two drift, and a drifted map format breaks the interop above.
+
+`/wayfinder` is user-invoked, so you cannot invoke it. **Read its `SKILL.md` directly** before touching the map: `../../engineering/wayfinder/SKILL.md` relative to this file, or `~/.claude/skills/wayfinder/SKILL.md` where the skills are linked. Everything below is a diff against what you read there.
+
+## One mode only
+
 Only the **work through the map** mode exists here. Charting has no AFK version — naming the destination is grilling the human — so invoke this skill with a map, and chart with `/wayfinder`.
 
 ## The rubric is the map header

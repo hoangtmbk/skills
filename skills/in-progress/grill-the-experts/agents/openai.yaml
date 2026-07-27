@@ -1,5 +1,3 @@
 interface:
   display_name: "Grill the Experts"
   short_description: "Expert subagents answer the detail questions"
-policy:
-  allow_implicit_invocation: false
