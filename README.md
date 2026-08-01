@@ -6,9 +6,14 @@ Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit tr
 
 These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own.
 
-## Quickstart
+## Installation
 
-### Claude Code (recommended — plugin install)
+Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when I ship — you subscribe rather than fork. **[skills.sh](https://skills.sh/hoangtmbk/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one — installing both leaves you with every skill twice.
+
+### 1. Get the skills
+
+<details>
+<summary><strong>Claude Code (recommended)</strong></summary>
 
 Ships skills + the `bowser-qa-agent` subagent + the `/browser-qa` and `/qa-clean` slash commands as one Claude Code plugin.
 
@@ -24,7 +29,14 @@ Ships skills + the `bowser-qa-agent` subagent + the `/browser-qa` and `/qa-clean
 /plugin install hoangta-skills@hoangtmbk-skills
 ```
 
-Restart Claude Code after install. Then run `/setup-hoangta-skills` once per repo to wire up `docs/agents/` config (issue tracker, triage label vocabulary, doc location).
+Or from your shell:
+
+```bash
+claude plugin marketplace add hoangtmbk/skills
+claude plugin install hoangta-skills@hoangtmbk-skills
+```
+
+Restart Claude Code after install.
 
 **Selective activation** — to disable skills you don't need in a repo, add `skillOverrides` to the repo's `.claude/settings.json`:
 
@@ -39,16 +51,36 @@ Restart Claude Code after install. Then run `/setup-hoangta-skills` once per rep
 
 `"off"` removes the skill from the preloaded catalog entirely (saves context tokens). `"name-only"` keeps the name visible but drops the description.
 
-### Codex, Gemini CLI, other coding agents (skills only)
+</details>
 
-The `npx skills@latest` installer drops the `skills/` directory into `.agents/skills/`. It does **not** install the `bowser-qa-agent` subagent or the `/browser-qa` / `/qa-clean` slash commands — those are Claude Code plugin-only. If you need the browser-QA harness on a non-Claude-Code agent, copy the files manually per [`skills/engineering/playwright-qa/INSTALL.md`](./skills/engineering/playwright-qa/INSTALL.md).
+<details>
+<summary><strong>Codex, and other agents</strong></summary>
 
 ```bash
 npx skills@latest add hoangtmbk/skills
 ```
 
+Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take — make sure `setup-hoangta-skills` is one of them.**
+
+The installer drops the `skills/` directory into `.agents/skills/`. It does **not** install the `bowser-qa-agent` subagent or the `/browser-qa` / `/qa-clean` slash commands — those are Claude Code plugin-only. If you need the browser-QA harness on a non-Claude-Code agent, copy the files manually per [`skills/engineering/playwright-qa/INSTALL.md`](./skills/engineering/playwright-qa/INSTALL.md).
+
+A native Codex plugin is on the roadmap — see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
+
+</details>
+
+<details>
+<summary><strong>For tinkerers</strong></summary>
+
+Use the same installer, on any agent — including Claude Code:
+
+```bash
+npx skills@latest add hoangtmbk/skills
+```
+
+It writes the skills into your repo as ordinary files you own and can edit. Nothing updates behind your back; pull the latest changes when you want them with `npx skills update`.
+
 > [!NOTE]
-> **Using the npx installer on Claude Code (fallback only)**: Claude Code auto-discovers skills under `.claude/skills/`, not `.agents/skills/`. After install, symlink them across:
+> Claude Code auto-discovers skills under `.claude/skills/`, not `.agents/skills/`. After install, symlink them across:
 >
 > ```bash
 > mkdir -p .claude/skills && \
@@ -57,34 +89,17 @@ npx skills@latest add hoangtmbk/skills
 >
 > The plugin install above is the supported path for Claude Code — use this only if the plugin install isn't an option.
 
-Then run `/setup-hoangta-skills` to set up `docs/agents/` config.
+</details>
 
-## Install as a Claude Code plugin
+### 2. Run `/setup-hoangta-skills`
 
-Prefer a plug-and-play install you don't maintain by hand? These skills also ship as a native [Claude Code plugin](https://code.claude.com/docs/en/plugins). Instead of copying editable files into your repo, the plugin installs the whole skill set as a managed bundle that updates when I ship a new version — you subscribe rather than fork.
+In your agent, run it once per repo. It will:
 
-Inside Claude Code:
+- Ask you which issue tracker you want to use (GitHub, Linear, or local files)
+- Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
+- Ask you where you want to save any docs we create
 
-```
-/plugin marketplace add hoangtmbk/skills
-/plugin install hoangta-skills@hoangtmbk-skills
-```
-
-Or from your shell:
-
-```bash
-claude plugin marketplace add hoangtmbk/skills
-claude plugin install hoangta-skills@hoangtmbk-skills
-```
-
-Then run `/setup-hoangta-skills` once per repo, exactly as in the quickstart above.
-
-Two ways to install, two philosophies:
-
-- **[skills.sh](https://skills.sh/hoangtmbk/skills)** copies the skills into your project so you can hack on them and make them your own.
-- **The plugin** keeps them as a read-only, always-current bundle you don't edit — best when you just want my set to work and follow along as it evolves.
-
-> Using Codex or another agent? The [skills.sh installer](https://skills.sh/hoangtmbk/skills) already installs these skills into Codex and other Agent-Skills-standard harnesses today. A native Codex plugin is on the roadmap — see [`.agents/adr/0002-ship-as-a-claude-code-plugin.md`](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
+### 3. Bam - you're ready to go.
 
 ## Why These Skills Exist
 
