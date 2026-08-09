@@ -58,8 +58,8 @@ Most other skills (`tdd`, `diagnose`, `triage`, etc.) are unchanged from upstrea
    - `skills/<bucket>/README.md`
    - `.claude-plugin/plugin.json` (if it's in `engineering/`, `productivity/`, or `misc/`)
 3. Bucket rules (from `CLAUDE.md`):
-   - `engineering/` / `productivity/` / `misc/` — must be in `README.md` + `plugin.json`
-   - `personal/` / `in-progress/` / `deprecated/` — must NOT be in either
+   - `engineering/` / `productivity/` — must be in `README.md` + `plugin.json`
+   - `misc/` / `in-progress/` / `deprecated/` — must NOT be in either
 
 ## Adding a new agent or slash command
 
@@ -208,6 +208,6 @@ If a merge tries to touch these, take the local version.
 
 ## Future TODOs
 
-- Move `~/.claude/skills/drawio/` into `skills/personal/` or `skills/productivity/` once decided
+- Move `~/.claude/skills/drawio/` into `skills/misc/` or `skills/productivity/` once decided
 - Move `~/.claude/skills/library/` into the workspace (it's currently its own git repo)
 - Switch `~/.claude/skills/` symlinks to point at the workspace instead of `~/.agents/skills/`
