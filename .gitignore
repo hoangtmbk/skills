@@ -1,4 +1,5 @@
 node_modules
+.claude
 
 # `npx skills` self-install: this repo's own skills copied back into it.
 # Redundant here — scripts/link-skills.sh installs them globally instead.
