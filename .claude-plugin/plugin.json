@@ -1,6 +1,6 @@
 {
   "name": "hoangta-skills",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Engineering and productivity skills for real work with Claude Code — grilling, spec/ticket flows, TDD, code review, domain modelling, plus the browser-QA harness (playwright-qa + bowser-qa-agent + /browser-qa + /qa-clean).",
   "author": {
     "name": "hoangta"
