@@ -17,3 +17,4 @@ npx skills@latest add hoangtmbk/skills --skill=<name>
 - **[ask-codex](./ask-codex/SKILL.md)**: Get a read-only second opinion from the Codex CLI: package a self-contained brief, run `codex exec`, relay every point back attributed. Model-invoked.
 - **[grill-the-experts](./grill-the-experts/SKILL.md)**: A grilling where expert subagents answer the evidence questions, adjudicated against your rubric; only preference calls come back to you. Model-invoked.
 - **[wayfinder-afk](./wayfinder-afk/SKILL.md)**: `/wayfinder` worked AFK: grilling tickets resolve through `/grill-the-experts`' expert panels; preference calls are parked for the human instead of blocking. User-invoked.
+- **[software-factory](./software-factory/SKILL.md)**: Shared language for designing a software factory: the tasks it runs and the services it plugs into. Call it alongside a grilling session. User-invoked.
